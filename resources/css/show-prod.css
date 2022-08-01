@@ -1,0 +1,25 @@
+@import url('colors/viollet_pallet.css');
+
+.table th{
+    background-color: var(--secondColor);
+    font-weight: bold;
+}
+
+.table td{
+    background-color: 'white';
+    color:var(--firstColor);
+}
+
+h1{
+    color:var(--firstColor);
+}
+
+.btn-primary{
+    background-color: var(--secondColor);
+    border-color: var(--firstColor);
+}
+
+.btn-primary:hover{
+    background-color: var(--firstColor);
+    border-color: var(--secondColor);
+}
