@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('nome');
             $table->text('descricao');
             $table->integer('qtd_estoque');
+            $table->string('codigo_barra')->default('000');
             $table->float('preco');
             $table->boolean('importado')->default(false);
             $table->timestamps();
