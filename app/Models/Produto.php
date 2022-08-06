@@ -12,6 +12,9 @@ class Produto extends Model
     protected $fillable = [
         'nome',
         'descricao',
-        'preco'
+        'preco',
+        'qtd_estoque',
+        'preco',
+        'importado'
     ];
 }
