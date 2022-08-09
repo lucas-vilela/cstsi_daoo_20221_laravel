@@ -20,10 +20,7 @@ class ProdutoController extends Controller
     {
         $listProdutos = $this->produto->all();
         // return response()->json($listProdutos);
-        return view(
-            'produtos',
-            ['produtos' => $listProdutos]
-        );
+        return view('produtos', ['produtos' => $listProdutos] );
     }
 
     public function show($id)
