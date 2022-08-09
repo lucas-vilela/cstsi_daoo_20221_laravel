@@ -1,68 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    @vite(['resources/css/app.css'])
-    <title>Lista de Produtos</title>
-</head>
-
-<body>
+<x-layouts.app>
     <h1>Produtos</h1>
     @if ($produtos->count() > 0)
         <div class="container text-center">
             <div class="row align-items-center">
                 <div class="col">
-
-                    <table class='table  table-striped'>
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nome</th>
-                                <th>Quantidade</th>
-                                <th>Preço</th>
-                                <th>Importado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($produtos as $produto)
-                                <tr>
-                                    <td><a href="{{ route('show', $produto->id) }}">
-                                            {{ $produto->id }}
-                                        </a>
-                                    </td>
-                                    <td>{{ $produto->nome }}</td>
-                                    <td>{{ $produto->qtd_estoque }}</td>
-                                    <td>{{ $produto->preco }}</td>
-                                    <td>{{ $produto->importado ? 'Sim' : 'Não' }}</td>
-                                    <td>
-                                        <a href="{{ route('edit', $produto->id) }}">
-                                            <button class='btn btn-primary btn-sm'>Editar</button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('delete', $produto->id) }}">
-                                            <button class='btn btn-danger btn-sm'>Remover</button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <x-table-products>
+                        @foreach ($produtos as $produto)
+                        <tr>
+                            <td><a href="{{ route('show', $produto->id) }}">
+                                    {{ $produto->id }}
+                                </a>
+                            </td>
+                            <td>{{ $produto->nome }}</td>
+                            <td>{{ $produto->qtd_estoque }}</td>
+                            <td>{{ $produto->preco }}</td>
+                            <td>{{ $produto->importado ? 'Sim' : 'Não' }}</td>
+                            <td>
+                                <a href="{{ route('edit', $produto->id) }}">
+                                    <button class='btn btn-primary btn-sm'>Editar</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('delete', $produto->id) }}">
+                                    <button class='btn btn-danger btn-sm'>Remover</button>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </x-table-products>
                 </div>
             </div>
         </div>
     @else
         <p>Produtos não encontrados! </p>
     @endif
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
-    </script>
-    {{-- @vite('resources/js/app.js') --}}
-</body>
-
-</html>
+</x-layouts.app>
