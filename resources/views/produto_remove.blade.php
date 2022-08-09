@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Produtos</title>
-</head>
-<body>
+<x-layouts.app>
     @if ($produto)
         <h1>{{ $produto->nome }}</h1>
         <p>{{ $produto->descricao }}</p>
@@ -16,19 +7,21 @@
             <li>Preço: {{ $produto->preco }}</li>
             <li>Importado: {{ $produto->importado ? 'Sim' : 'Não' }}</li>
         </ul>
-        <form action="{{route('remove',$produto->id)}}" method="post">
+        <form id='remove' action="{{route('remove',$produto->id)}}" method="post">
             @csrf
             <h4 style="color:red;font-weight:bold">Confirmar a exclusão deste item?</h4>
-            <table>
-                <tr align="center">
-                    <td colspan="2">
-                        <input type="hidden" name='id' value="{{$produto->id}}" />
-                        <input type="submit" name='confirmar' value="Deletar"/>
-                    </td>
-                </tr>
-            </table>
+            <input type="hidden" name='id' value="{{$produto->id}}" />
         </form>
-            <a href="/produtos"><button>Cancelar</button></a>
+        <table>
+            <tr align="center">
+                <td>
+                    <a href="/produtos"><button class='btn btn-info'>Cancelar</button></a>
+                </td>
+                <td >
+                    <input form="remove" type="submit" class='btn btn-danger' name='confirmar' value="Deletar"/>
+                </td>
+            </tr>
+        </table>
     @else
         <p>Produtos não encontrados! </p>
         <a href="/produtos">&#9664;Voltar</a>
@@ -36,5 +29,4 @@
     @if(isset($msg))
     <p>{{$msg}}</p>
     @endif
-</body>
-</html>
+</x-layouts.app>

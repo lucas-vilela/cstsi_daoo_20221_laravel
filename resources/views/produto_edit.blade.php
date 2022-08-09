@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    <h1>Insert new Produto</h1>
-    <form action="{{route('update',$produto->id)}}" method="POST">
+<x-layouts.app>
+    <h1>Atualizar Produto</h1>
+    <form id='update' action="{{route('update',$produto->id)}}" method="POST">
         @csrf
         <table>
             <tr>
@@ -33,16 +23,19 @@
                 <td>Importado:</td>
                 <td><input type="checkbox" name="importado" {{($produto->importado)?'checked':''}}/></td>
             </tr>
-            <tr align="center">
-                <td colspan="2">
-                    <input type="submit" name='confirmar' value="Salvar"/>
-                    <a href="/produtos">Cancelar</a>
-                </td>
-            </tr>
         </table>
     </form>
+    <table>
+        <tr align="center">
+            <td>
+                <a href="/produtos"><button class='btn btn-danger'>Cancelar</button></a>
+            </td>
+            <td >
+                <input form="update" type="submit" class='btn btn-success' name='confirmar' value="Atualizar"/>
+            </td>
+        </tr>
+    </table>
     @if(isset($msg))
     <p>{{$msg}}</p>
     @endif
-</body>
-</html>
+</x-layouts.app>
