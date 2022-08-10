@@ -1,4 +1,4 @@
-<table {{$attributes->merge(['class'=>'table table-striped'])}}>
+<table {{$attributes->merge(['class'=>"table table-$type"])}}>
     <thead>
         <tr>
             <th>Id</th>

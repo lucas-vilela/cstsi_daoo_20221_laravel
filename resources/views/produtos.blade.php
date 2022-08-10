@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col">
                 @if ($produtos->count() > 0)
-                    <x-table.products :products="$produtos" class='table-hover'/>
+                    <x-table.products :products="$produtos" type="hover"/>
                 @else
                     <p>Produtos não encontrados! </p>
                 @endif
