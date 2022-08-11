@@ -24,7 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function(){
     Route::get('/produtos',
-    [ProdutoController::class,'index']);
+    [ProdutoController::class,'index'])->name('produtos');
 
    Route::get('/produto/{id}',[
        ProdutoController::class,
