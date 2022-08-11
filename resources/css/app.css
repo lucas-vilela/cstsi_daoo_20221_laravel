@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1{
+    color:#393970;
+    font-weight: bold;
+    text-align: center;
+}
