@@ -1,8 +1,8 @@
-<x-guest-layout>
-    <x-auth-card>
+<x-guest-layout >
+    <x-auth-card class='bg-green-800'>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-application-logo class="w-20 h-20 fill-current text-red-500" />
             </a>
         </x-slot>
 
@@ -47,7 +47,7 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button class="my-2 ml-3 bg-red-900">
                     {{ __('Log in') }}
                 </x-button>
             </div>
