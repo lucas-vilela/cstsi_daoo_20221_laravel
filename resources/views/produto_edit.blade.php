@@ -1,5 +1,11 @@
-<x-layouts.app>
-    <h1>Atualizar Produto</h1>
+<x-app-layout>
+    <x-slot name="header">
+        {{-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Produtos') }}
+        </h2> --}}
+        <h2 class='text-2xl'>Atualizar Produto</h2>
+    </x-slot>
+
     <form id='update' action="{{route('update',$produto->id)}}" method="POST">
         @csrf
         <table>
@@ -38,4 +44,4 @@
     @if(isset($msg))
     <p>{{$msg}}</p>
     @endif
-</x-layouts.app>
+</x-app-layout>

@@ -19,7 +19,6 @@ class ProdutoController extends Controller
     public function index()
     {
         $listProdutos = $this->produto->all();
-        // return response()->json($listProdutos);
         return view('produtos', ['produtos' => $listProdutos] );
     }
 
@@ -38,7 +37,6 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         try {
-            // dd($request->all());
             $produto = $request->all();
             $produto['importado'] = $request->importado ? true : false;
             Produto::create($produto);
@@ -81,7 +79,6 @@ class ProdutoController extends Controller
 
     public function remove(Request $request,$id)
     {
-        // dd(Produto::find($request->id));
         if($request->id){
             if (!Produto::destroy($request->id))
             return view('produto_remove', [
