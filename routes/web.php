@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function(){
    Route::get('/produto',[
        ProdutoController::class,
        'create'
-   ]);
+   ])->name('produto.create');
 
    Route::post('/produto',[
        ProdutoController::class,
