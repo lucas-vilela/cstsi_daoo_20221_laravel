@@ -33,7 +33,7 @@
                 </td>
                 <td>
                     <a href="{{ route('delete', $produto->id) }}">
-                        <button class='btn btn-danger btn-sm'>Remover</button>
+                        <x-button-error>Remover</x-button-error>
                     </a>
                 </td>
             </tr>
