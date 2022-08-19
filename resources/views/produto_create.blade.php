@@ -5,7 +5,7 @@
 
     <div class="flex flex-col items-center">
         <div class="m-10 p-3 shadow-lg self-center flex flex-col items-center bg-white rounded-md pt-6 w-4/5">
-            <form id="create" action="/produto" met hod="POST">
+            <form id="create" action="/produto" method="POST">
                 @csrf
                 {{-- <input type="hidden" name="_token" value="{{csrf_token()}}"/> --}}
                 <table>
