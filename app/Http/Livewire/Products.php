@@ -16,6 +16,7 @@ class Products extends Component
     public $quantidade;
     public $preco;
     public $importado;
+    public $idprod;
 
     public function mount(){
         $this->produtos = Produto::all();
@@ -39,6 +40,7 @@ class Products extends Component
         $this->orderAsc = !$this->orderAsc;
     }
 
+
     public function save(){
         $produto = [
             "nome"=>$this->nome,
@@ -49,6 +51,10 @@ class Products extends Component
         ];
         Produto::create($produto);
         $this->produtos = Produto::all()->reverse();
+    }
+
+    public function delete(){
+        dd($this->idprod);
     }
 
     public function render()

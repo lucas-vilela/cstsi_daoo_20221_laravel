@@ -43,6 +43,20 @@
         </tbody>
     </table>
 
+    {{-- Exemplo para modal de remoção --}}
+    {{-- @foreach ($listProducts as $produto)
+        <div x-data="{
+                idprod:{{$produto->id}},
+                log(){
+                    console.log(this.idprod)
+                    $wire.set('idprod',this.idprod)
+                    $wire.delete()
+                },
+            }">
+        <button x-text="idprod" @click="log()"></button>
+        </div>
+    @endforeach --}}
+
      <div x-show="open" x-bind:class="!open ? 'hidden' :
             'overflow-y-auto overflow-x-hidden pl-60 fixed top-0 right-0 left-0 z-50 h-modal md:h-full bg-gray'">
         <div class="flex flex-col w-1/2 pt-10 " @click.away="open = false">
