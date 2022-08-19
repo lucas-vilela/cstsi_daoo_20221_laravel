@@ -11,6 +11,12 @@ class Products extends Component
     public $produtos;
     public $orderAsc;
 
+    public $nome;
+    public $descricao;
+    public $quantidade;
+    public $preco;
+    public $importado;
+
     public function mount(){
         $this->produtos = Produto::all();
         $this->orderAsc = TRUE;
@@ -31,6 +37,18 @@ class Products extends Component
     public function orderBy($column){
         $this->produtos = Produto::orderBy($column,$this->orderAsc?'asc':'desc')->get();
         $this->orderAsc = !$this->orderAsc;
+    }
+
+    public function save(){
+        $produto = [
+            "nome"=>$this->nome,
+            "descricao"=>$this->descricao,
+            "preco"=>$this->preco,
+            "qtd_estoque"=>$this->quantidade,
+            "importado"=>$this->importado?true:false
+        ];
+        Produto::create($produto);
+        $this->produtos = Produto::all()->reverse();
     }
 
     public function render()
