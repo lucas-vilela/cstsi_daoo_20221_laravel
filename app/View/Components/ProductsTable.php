@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class ProductsTable extends Component
 {
-    public $products;
+    public $listProducts;
     public $type;
     public $value;
     /**
@@ -14,9 +14,9 @@ class ProductsTable extends Component
      *
      * @return void
      */
-    public function __construct($products,$type)
+    public function __construct($listProducts,$type)
     {
-        $this->products = $products;
+        $this->listProducts = $listProducts;
         $this->type = $type;
     }
 
