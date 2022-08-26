@@ -31,7 +31,7 @@
                         <tbody>
                             @foreach ($produtos as $produto)
                                 <tr>
-                                    <td><a href="{{ route('show', $produto->id) }}">
+                                    <td><a href="/produto/{{$produto->id}}">
                                             {{ $produto->id }}
                                         </a>
                                     </td>
