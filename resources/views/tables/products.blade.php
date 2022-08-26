@@ -10,8 +10,8 @@
                 <th>Importado</th>
                 <th colspan="2">
                     {{-- <a href="{{route('produto.create')}}"> --}}
-                    <x-button @click="open = !open" class="my-2 ml-3 bg-green-500 hover:bg-green-900">
-                        Criar Novo Produto
+                    <x-button @click="open = !open" class="mt-2 ml-3 bg-green-500 hover:bg-green-900 ">
+                        Cadastrar
                     </x-button>
                     {{-- </a> --}}
                 </th>
