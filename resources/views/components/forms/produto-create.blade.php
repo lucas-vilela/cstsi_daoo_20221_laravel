@@ -44,21 +44,22 @@
             </tr>
         </table>
 
-    <table>
-        <tr align="center">
-            <td>
-                <button @click="open=false" class='btn btn-danger'>
-                    Cancelar
-                </button>
-            </td>
-            <td>
-                <button form="produto-create" @click="open=false" class='btn btn-success bg-green-600'>
-                    Criar
-                </button>
-            </td>
-        </tr>
-    </table>
+
 </form>
+<table>
+    <tr align="center">
+        <td>
+            <button @click="open=false" class='btn btn-danger'>
+                Cancelar
+            </button>
+        </td>
+        <td>
+            <button form="produto-create" @click="open=false" class='btn btn-success bg-green-600'>
+                Criar
+            </button>
+        </td>
+    </tr>
+</table>
 </div>
 
 </div>
