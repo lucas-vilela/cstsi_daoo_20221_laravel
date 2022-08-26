@@ -50,11 +50,30 @@ class Products extends Component
             "importado"=>$this->importado?true:false
         ];
         Produto::create($produto);
-        $this->produtos = Produto::all()->reverse();
+        $this->orderAsc = false;
+        $this->list();
+        $this->clear();
     }
 
-    public function delete(){
-        dd($this->idprod);
+    private function list(){
+        if($this->orderAsc)
+            $this->produtos = Produto::all();
+         else $this->produtos = Produto::all()->reverse();
+     }
+
+    public function remove($id){
+        if(!Produto::destroy($id))
+            return "Erro!";
+        $this->list();
+    }
+
+    private function clear()
+    {
+        $this->nome = '';
+        $this->descricao = '';
+        $this->preco = 0;
+        $this->quantidade = 0;
+        $this->importado = null;
     }
 
     public function render()
