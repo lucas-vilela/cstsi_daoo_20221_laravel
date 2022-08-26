@@ -1,5 +1,5 @@
-<div class="flex flex-col w-full h-full pt-40 bg-gray-600/50" @click="idmodal=null">
-    <div class="flex flex-col justify-center w-1/2 shadow dark:bg-gray-700 h-auto m-5 p-3 bg-white self-center rounded-md">
+<div class="flex flex-col w-full h-full pt-10 bg-gray-600/50" @click="idmodal=null">
+    <div class="flex flex-col justify-center w-3/4 shadow dark:bg-gray-700 h-auto m-5 p-3 bg-white self-center rounded-md">
 
         <div class="p-2 mb-2 border-b-2 border-gray-300 ">
                 <h1 class="text-2xl">{{ $produto->nome }}</h1>
