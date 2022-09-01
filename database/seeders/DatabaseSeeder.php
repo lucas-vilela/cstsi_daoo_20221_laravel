@@ -14,13 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(5)->create();
+        // \App\Models\User::factory(5)->create();
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
 
         (new RegiaoSeeder)->run();
         (new EstadoSeeder)->run();
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+
+        \App\Models\Fornecedor::factory(fake()->randomNumber(2))
+            ->hasProdutos(fake()->numberBetween(3, 9))
+            ->create();
     }
 }
