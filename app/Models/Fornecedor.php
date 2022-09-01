@@ -19,7 +19,13 @@ class Fornecedor extends Model
         "endereco"
     ];
 
-    public function estado(){
+    public function estado()
+    {
         return $this->belongsTo(Estado::class);
+    }
+
+    public function produtos()
+    {
+        return $this->hasMany(Produto::class);
     }
 }
