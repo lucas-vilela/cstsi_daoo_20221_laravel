@@ -10,6 +10,12 @@ class Fornecedor extends Model
     use HasFactory;
 
     protected $table = "fornecedores";
+    protected $fillable = [
+        "nome",
+        "endereco",
+        "cnpj",
+        "telefone"
+    ];
 
     public function produtos(){
         return $this->hasMany(Produto::class);
