@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\FornecedorController;
 use App\Http\Controllers\Api\ProdutoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,10 @@ Route::get('produto/{id}',[ProdutoController::class,'show']);
 Route::post('produto',[ProdutoController::class,'store']);
 Route::put('produto/{id}',[ProdutoController::class,'update']);
 Route::delete('produto/{id}',[ProdutoController::class,'remove']);
+
+//Artisan - para listar as rotas de fornecedores
+//Linux|Mac: php artisan route:list | grep fornecedores
+//Windows (powershell): php artisan route:list | findStr 'fornecedores'
+Route::apiResource('fornecedores',FornecedorController::class)
+    ->parameters(['fornecedores'=>'fornecedor']);
+
