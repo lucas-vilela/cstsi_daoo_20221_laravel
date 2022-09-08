@@ -24,3 +24,4 @@ Route::get('produto',[ProdutoController::class,'index']);
 Route::get('produto/{id}',[ProdutoController::class,'show']);
 Route::post('produto',[ProdutoController::class,'store']);
 Route::put('produto/{id}',[ProdutoController::class,'update']);
+Route::delete('produto/{id}',[ProdutoController::class,'remove']);
