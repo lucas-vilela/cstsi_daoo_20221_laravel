@@ -46,4 +46,24 @@ class ProdutoController extends Controller
             return response()->json($responseError, $statusHttp);
         }
     }
+
+
+    public function update(Request $request,$id)
+    {
+        try{
+            $newProduto = Produto::findOrfail($id);
+            $newProduto->update($request->all());
+            return response()->json([
+                'msg'=>'Produto atualizado com sucesso!',
+                'produto'=>$newProduto
+            ]);
+        }catch(\Exception $error){
+            $responseError = [
+                'Erro'=>"Erro ao atualizar novo produto!",
+                'Exception'=>$error->getMessage()
+            ];
+            $statusHttp=404;
+            return response()->json($responseError, $statusHttp);
+        }
+    }
 }
