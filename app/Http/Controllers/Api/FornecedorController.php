@@ -31,7 +31,19 @@ class FornecedorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            return response()->json([
+                'msg'=>'Fornecedor inserido com sucesso!',
+                'fornecedor'=>$this->fornecedor->create($request->all())
+            ]);
+        }catch(\Exception $error){
+            $responseError = [
+                'Erro'=>"Erro ao cadastrar novo Fornecedor!",
+                'Exception'=>$error->getMessage()
+            ];
+            $statusHttp=401;
+            return response()->json($responseError, $statusHttp);
+        }
     }
 
     /**
@@ -40,9 +52,9 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Fornecedor $fornecedor)
     {
-        //
+        return $fornecedor;
     }
 
     /**
