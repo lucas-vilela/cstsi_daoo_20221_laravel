@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fornecedor;
 use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
 {
+    private $fornecedor;
+    public function __construct(Fornecedor  $fornecedor)
+    {
+        $this->fornecedor = $fornecedor;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class FornecedorController extends Controller
      */
     public function index()
     {
-        //
+        return $this->fornecedor->all();
     }
 
     /**
