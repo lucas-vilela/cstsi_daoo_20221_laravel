@@ -12,4 +12,9 @@ class ProdutoController extends Controller
     {
         return response()->json(Produto::all());
     }
+
+    public function show($id)
+    {
+        return response()->json(Produto::find($id));
+    }
 }
