@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fornecedor_id')->references('id')
+                ->on('fornecedores')->cascadeOnDelete();
             $table->text('nome');
             $table->text('descricao');
             $table->integer('qtd_estoque');
-            $table->string('codigo_barra')->default('000');
+            // $table->string('codigo_barra')->default('000');
             $table->float('preco');
             $table->boolean('importado')->default(false);
             $table->timestamps();
