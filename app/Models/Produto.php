@@ -15,7 +15,8 @@ class Produto extends Model
         'preco',
         'qtd_estoque',
         'preco',
-        'importado'
+        'importado',
+        'fornecedor_id'
     ];
 
     public function fornecedor()
