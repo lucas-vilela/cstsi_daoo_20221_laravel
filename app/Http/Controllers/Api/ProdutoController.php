@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Produto;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -64,6 +65,24 @@ class ProdutoController extends Controller
             ];
             $statusHttp=404;
             return response()->json($responseError, $statusHttp);
+        }
+    }
+
+    public function remove($id)
+    {
+        try{
+            if(Produto::findOrfail($id)->delete())
+                return response()->json([
+                    "msg"=>"Produto com id:$id removido!"
+                ]);
+            else throw new Exception("Erro ao deletar produto com id:$id.");
+        }catch(\Exception $error){
+            $responseError = [
+                'Erro'=>"O produto com id:$id não foi removido!",
+                'Exception'=>$error->getMessage()
+            ];
+            $statusHttp = 500;
+            return response()->json($responseError,$statusHttp);
         }
     }
 }
