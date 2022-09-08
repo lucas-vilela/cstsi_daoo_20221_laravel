@@ -26,4 +26,24 @@ class ProdutoController extends Controller
             return response()->json($responseError,$statusHttp);
         }
     }
+
+    public function store(Request $request)
+    {
+        try{
+            $newProduto = $request->all();
+            $newProduto['importado'] = $request->importado? true:false;
+            $storedProduto = Produto::create($newProduto);
+            return response()->json([
+                'msg'=>'Produto inserido com sucesso!',
+                'produto'=>$storedProduto
+            ]);
+        }catch(\Exception $error){
+            $responseError = [
+                'Erro'=>"Erro ao inserir novo produto!",
+                'Exception'=>$error->getMessage()
+            ];
+            $statusHttp=404;
+            return response()->json($responseError, $statusHttp);
+        }
+    }
 }
