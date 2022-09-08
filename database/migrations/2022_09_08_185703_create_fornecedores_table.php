@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fornecedors', function (Blueprint $table) {
+        Schema::create('fornecedores', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->text('endereco');
+            $table->string('cnpj');
+            $table->string('telefone');
             $table->timestamps();
         });
     }
