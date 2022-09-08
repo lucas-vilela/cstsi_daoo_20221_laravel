@@ -19,7 +19,7 @@ class ProdutoFactory extends Factory
         return [
             'nome'=>$this->faker->word(),
             'descricao'=>$this->faker->paragraph(4),
-            'qtd_esotque'=>$this->faker->randomNumber(5),
+            'qtd_estoque'=>$this->faker->randomNumber(5),
             'preco'=>$this->faker->randomFloat(2,100,15000),
             'importado'=>$this->faker->boolean()
         ];
