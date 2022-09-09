@@ -17,7 +17,10 @@ class Regiao extends Model
     }
 
     public function fornecedores(){
-        return $this->hasManyThrough(Fornecedor::class, Estado::class);
+        return $this->hasManyThrough(
+            Fornecedor::class,
+            Estado::class
+        );
     }
 
     public function produtos()
