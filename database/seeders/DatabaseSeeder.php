@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        (new RegiaoSeeder)->run();
+        $seederRegiao = new RegiaoSeeder();
+        $seederRegiao->run();
         (new EstadoSeeder)->run();
 
-        \App\Models\Fornecedor::factory(fake()->randomNumber(2))
+        \App\Models\Fornecedor::factory(5)
             ->hasProdutos(fake()->numberBetween(3, 9))
             ->create();
     }
