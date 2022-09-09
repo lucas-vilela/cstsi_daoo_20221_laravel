@@ -3,15 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProdutoRequest;
 use App\Models\Produto;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Produto::all());
+        $perPage = $request->query('per_page');
+        $request->query('per_page');
+        $results = Produto::with('fornecedor')->paginate($perPage)
+            ->appends([
+                'per_page'=>$perPage
+            ]);
+        return response()->json($results);
     }
 
     public function show($id)
@@ -28,7 +36,7 @@ class ProdutoController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(ProdutoRequest $request)
     {
         try{
             $newProduto = $request->all();
@@ -43,13 +51,16 @@ class ProdutoController extends Controller
                 'Erro'=>"Erro ao inserir novo produto!",
                 'Exception'=>$error->getMessage()
             ];
-            $statusHttp=404;
+
+            if($error instanceof QueryException)
+                $statusHttp = 500;
+            else $statusHttp = 400;
             return response()->json($responseError, $statusHttp);
         }
     }
 
 
-    public function update(Request $request,$id)
+    public function update(ProdutoRequest $request,$id)
     {
         try{
             $newProduto = Produto::findOrfail($id);
@@ -60,7 +71,7 @@ class ProdutoController extends Controller
             ]);
         }catch(\Exception $error){
             $responseError = [
-                'Erro'=>"Erro ao atualizar novo produto!",
+                'Erro'=>"Erro ao atualizar produto!",
                 'Exception'=>$error->getMessage()
             ];
             $statusHttp=404;
