@@ -21,7 +21,8 @@ class ProdutoFactory extends Factory
             "descricao" => fake()->sentence(10),
             "preco" => fake()->randomFloat(2, 100, 10000),
             "qtd_estoque" => fake()->randomNumber(3, false),
-            "importado" => fake()->numberBetween(0, 1)
+            // "importado" => fake()->numberBetween(0, 1)
+            "importado" => fake()->boolean()
         ];
     }
 }
