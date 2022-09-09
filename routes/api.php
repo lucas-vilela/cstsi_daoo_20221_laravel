@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+//http://dominio.com:8080/api/produto/
 Route::get('produto',[ProdutoController::class,'index']);
 Route::get('produto/{id}',[ProdutoController::class,'show']);
 Route::post('produto',[ProdutoController::class,'store']);
@@ -32,4 +32,21 @@ Route::delete('produto/{id}',[ProdutoController::class,'remove']);
 //Windows (powershell): php artisan route:list | findStr 'fornecedores'
 Route::apiResource('fornecedores',FornecedorController::class)
     ->parameters(['fornecedores'=>'fornecedor']);
+
+Route::get('fornecedores/{fornecedor}/produtos',[
+    FornecedorController::class,
+    'produtos'
+]);
+
+
+
+
+
+
+
+
+
+
+
+
 
