@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fornecedor;
+use Exception;
 use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
@@ -34,7 +35,7 @@ class FornecedorController extends Controller
         try{
             return response()->json([
                 'msg'=>'Fornecedor inserido com sucesso!',
-                'fornecedor'=>$this->fornecedor->create($request->all())
+                'fornecedor'=>Fornecedor::create($request->all())
             ]);
         }catch(\Exception $error){
             $responseError = [
@@ -54,7 +55,12 @@ class FornecedorController extends Controller
      */
     public function show(Fornecedor $fornecedor)
     {
-        return $fornecedor;
+        return $fornecedor->load('produtos');//find($id)->with('relacao')->get()
+    }
+
+    public function produtos(Fornecedor $fornecedor)
+    {
+        return $fornecedor->load('produtos')->produtos;//find($id)->with('relacao')->get()
     }
 
     /**
@@ -64,9 +70,24 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Fornecedor $fornecedor)
     {
-        //
+        try{
+            $fornecedor->update($request->all());
+            return response()->json([
+                "msg"=>"Fornecedor atualizado!",
+                "Fornecedor"=>$fornecedor
+            ]);
+        }catch(\Exception $error){
+            $responseError = [
+                'Erro'=>"Erro ao atualizar Fornecedor!",
+                'Exception'=>$error->getMessage()
+            ];
+            $statusHttp=404;
+            return response()->json($responseError, $statusHttp);
+        }
+
+
     }
 
     /**
@@ -75,8 +96,22 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Fornecedor $fornecedor)
     {
-        //
+        try{
+            if($fornecedor->delete())
+                return response()->json([
+                    "msg"=>"Fornecedor excluido.",
+                    "fornecedor"=>$fornecedor
+                ]);
+            else throw new \Exception("Erro não detectado, tente mais tarde!");
+        }catch(\Exception $error){
+            $responseError = [
+                'Erro'=>"Erro ao deletar o fornecedor!",
+                'Exception'=>$error->getMessage()
+            ];
+            $statusHttp=404;
+            return response()->json($responseError, $statusHttp);
+        }
     }
 }
