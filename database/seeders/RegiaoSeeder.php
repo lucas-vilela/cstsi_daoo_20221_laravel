@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
+//php artisan make:seeder NomeSeeder
+//php artisan db:seed
 class RegiaoSeeder extends Seeder
 {
     /**
@@ -33,6 +35,12 @@ class RegiaoSeeder extends Seeder
             $listRegioes = [];
             foreach ($regioes as $regiao)
                 $listRegioes[] = ["nome" => $regiao['Nome']];
+
+                // [
+                //     ["nome"=>"Sul"],
+                //     ["nome"=>"Sudeste"],
+                //     ...
+                // ]
 
             if (!Regiao::insert($listRegioes))
                 throw new \Exception("Erro ao inserir Regioes!", 1);
