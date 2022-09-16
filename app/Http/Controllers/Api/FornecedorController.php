@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Fornecedor;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
@@ -32,17 +33,19 @@ class FornecedorController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+        try {
             return response()->json([
-                'msg'=>'Fornecedor inserido com sucesso!',
-                'fornecedor'=>Fornecedor::create($request->all())
+                'msg' => 'Fornecedor inserido com sucesso!',
+                'fornecedor' => Fornecedor::create($request->all())
             ]);
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
+            if($error instanceof QueryException)//Illuminate
+                $statusHttp = 500;
             $responseError = [
-                'Erro'=>"Erro ao cadastrar novo Fornecedor!",
-                'Exception'=>$error->getMessage()
+                'Erro' => "Erro ao cadastrar novo Fornecedor!",
+                'Exception' => $error->getMessage()
             ];
-            $statusHttp=401;
+            $statusHttp = $statusHttp ?? 401;
             return response()->json($responseError, $statusHttp);
         }
     }
@@ -55,12 +58,12 @@ class FornecedorController extends Controller
      */
     public function show(Fornecedor $fornecedor)
     {
-        return $fornecedor->load('produtos');//find($id)->with('relacao')->get()
+        return $fornecedor->load('produtos'); //find($id)->with('relacao')->get()
     }
 
     public function produtos(Fornecedor $fornecedor)
     {
-        return $fornecedor->load('produtos')->produtos;//find($id)->with('relacao')->get()
+        return $fornecedor->load('produtos')->produtos; //find($id)->with('relacao')->get()
     }
 
     /**
@@ -72,22 +75,22 @@ class FornecedorController extends Controller
      */
     public function update(Request $request, Fornecedor $fornecedor)
     {
-        try{
-            $fornecedor->update($request->all());
+        try {
+            $newFornecedor = $request->all();
+            $newFornecedor['estado_id'] = intval($request->estado_id);
+            $fornecedor->update();
             return response()->json([
-                "msg"=>"Fornecedor atualizado!",
-                "Fornecedor"=>$fornecedor
+                "msg" => "Fornecedor atualizado!",
+                "Fornecedor" => $fornecedor
             ]);
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
             $responseError = [
-                'Erro'=>"Erro ao atualizar Fornecedor!",
-                'Exception'=>$error->getMessage()
+                'Erro' => "Erro ao atualizar Fornecedor!",
+                'Exception' => $error->getMessage()
             ];
-            $statusHttp=404;
+            $statusHttp = 404;
             return response()->json($responseError, $statusHttp);
         }
-
-
     }
 
     /**
@@ -98,19 +101,19 @@ class FornecedorController extends Controller
      */
     public function destroy(Fornecedor $fornecedor)
     {
-        try{
-            if($fornecedor->delete())
+        try {
+            if ($fornecedor->delete())
                 return response()->json([
-                    "msg"=>"Fornecedor excluido.",
-                    "fornecedor"=>$fornecedor
+                    "msg" => "Fornecedor excluido.",
+                    "fornecedor" => $fornecedor
                 ]);
             else throw new \Exception("Erro não detectado, tente mais tarde!");
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
             $responseError = [
-                'Erro'=>"Erro ao deletar o fornecedor!",
-                'Exception'=>$error->getMessage()
+                'Erro' => "Erro ao deletar o fornecedor!",
+                'Exception' => $error->getMessage()
             ];
-            $statusHttp=404;
+            $statusHttp = 404;
             return response()->json($responseError, $statusHttp);
         }
     }
