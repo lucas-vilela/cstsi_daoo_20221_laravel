@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             FornecedorController::class, 'delete'
         ]);
     });
+
+    Route::post('logout',[LoginController::class,'logout']);
 });
 
 Route::get('fornecedores', [FornecedorController::class, 'index']);
