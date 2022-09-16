@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('fotos', function (Blueprint $table) {
             $table->id();
+            $table->string('url');
+            $table->string('filename');
+            $table->foreignId('id_produto')->constrained('produtos')->cascadeOnDelete();
             $table->timestamps();
         });
     }
