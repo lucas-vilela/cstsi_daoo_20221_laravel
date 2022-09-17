@@ -44,4 +44,8 @@ class Produto extends Model
     public function fotos(){
         return $this->hasMany(Fotos::class,'id_produto');
     }
+
+    public function hash(){
+        return substr(sha1($this->id), 35, 5);
+    }
 }

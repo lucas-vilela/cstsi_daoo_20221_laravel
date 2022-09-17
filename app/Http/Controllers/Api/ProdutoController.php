@@ -9,7 +9,6 @@ use App\Models\Produto;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class ProdutoController extends Controller
 {
@@ -17,7 +16,8 @@ class ProdutoController extends Controller
     {
         $perPage = $request->query('per_page');
         $request->query('per_page');
-        $results = Produto::with('fornecedor')->paginate($perPage)
+        $results = Produto::with('fornecedor')
+            ->paginate($perPage)
             ->appends([
                 'per_page' => $perPage
             ]);
@@ -69,20 +69,18 @@ class ProdutoController extends Controller
         $fotos = [];
         if ($produto && $request->hasFile('foto')) {
             $file = $request->file('foto');
-            if (is_array($file)) { //testa se foi enviado um array (foto[],foto[]...)
-                foreach ($file as $image) //insere multiplas fotos
+            if (is_array($file))
+                foreach ($file as $image)
                     $fotos[] = $this->saveFoto($image, $produto);
-            } else {
-                $fotos[] = $this->saveFoto($file, $produto);
-            }
+            else $fotos[] = $this->saveFoto($file, $produto);
         }
         return $fotos;
     }
 
     private function saveFoto($file, $produto)
     {
-        $folder = substr(sha1($produto->id), 35, 5);
-        $filename = $folder."/".$file->hashName();
+        $folder = $produto->hash();
+        $filename = $folder . "/" . $file->hashName();
         $path = $file->storeAs("fotos/produtos", $filename, 'public');
         return Fotos::create([
             'url' => asset('storage/' . $path),
