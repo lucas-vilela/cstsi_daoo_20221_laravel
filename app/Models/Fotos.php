@@ -16,6 +16,6 @@ class Fotos extends Model
     ];
 
     public function fotos(){
-        return $this->belongsTo(Produto::class);
+        return $this->belongsTo(Produto::class,'id_produto');
     }
 }

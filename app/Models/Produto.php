@@ -40,4 +40,8 @@ class Produto extends Model
             ]
         );
     }
+
+    public function fotos(){
+        return $this->hasMany(Fotos::class,'id_produto');
+    }
 }
