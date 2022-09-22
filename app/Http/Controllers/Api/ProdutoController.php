@@ -80,11 +80,12 @@ class ProdutoController extends Controller
     private function saveFoto($file, $produto)
     {
         $folder = $produto->hash();
-        $filename = $folder . "/" . $file->hashName();
-        $path = $file->storeAs("fotos/produtos", $filename, 'public');
+        $filename = $file->hashName();
+        $path = $file->storeAs("fotos/produtos/".$folder, $filename, 'public');
         return Fotos::create([
             'url' => asset('storage/' . $path),
             'filename' => $filename,
+            'path'=> $path,
             'id_produto' => $produto->id
         ]);
     }

@@ -12,6 +12,7 @@ class Fotos extends Model
     protected $fillable = [
         'url',
         'filename',
+        'path',
         'id_produto'
     ];
 
