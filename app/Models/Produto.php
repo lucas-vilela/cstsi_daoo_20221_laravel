@@ -42,7 +42,7 @@ class Produto extends Model
     }
 
     public function fotos(){
-        return $this->hasMany(Fotos::class,'id_produto');
+        return $this->hasMany(Foto::class,'id_produto');
     }
 
     public function hash(){
