@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProdutoRequest;
-use App\Models\Fotos;
+use App\Models\Foto;
 use App\Models\Produto;
 use Exception;
 use Illuminate\Database\QueryException;
@@ -80,11 +80,12 @@ class ProdutoController extends Controller
     private function saveFoto($file, $produto)
     {
         $folder = $produto->hash();
-        $filename = $folder . "/" . $file->hashName();
-        $path = $file->storeAs("fotos/produtos", $filename, 'public');
-        return Fotos::create([
+        $filename = $file->hashName();
+        $path = $file->storeAs("fotos/produtos/".$folder, $filename, 'public');
+        return Foto::create([
             'url' => asset('storage/' . $path),
             'filename' => $filename,
+            'path'=> $path,
             'id_produto' => $produto->id
         ]);
     }

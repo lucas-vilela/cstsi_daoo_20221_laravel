@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('url');
             $table->string('filename');
+            $table->string('path');
             $table->foreignId('id_produto')->constrained('produtos')->cascadeOnDelete();
             $table->timestamps();
         });
